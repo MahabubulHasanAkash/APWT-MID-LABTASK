@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Login</title>
+	<title>Signup</title>
 </head>
 <body>
 
@@ -14,6 +14,7 @@
 			{{$error}} <br>
 		 @endforeach
 		@endif
+		<a href="/login"> Login </a>
 		<fieldset>
 			<legend>Signup</legend>
 		<table>
@@ -39,27 +40,43 @@
 
             <tr>
 				<td>Conform password</td>
-				<td><input type="password" name="password"></td>
+				<td><input type="password" name="password_confirmation"></td>
 			</tr>
 
             <tr>
 				<td>Address</td>
-				<td><input type="password" name="address"></td>
+				<td><input type="text" name="address"></td>
+			</tr>
+
+			<tr>
+				<td>Phone</td>
+				<td><input type="text" name="phone"></td>
 			</tr>
 
             <tr>
 				<td>Company name</td>
-				<td><input type="password" name="company"></td>
+				<td><input type="text" name="company"></td>
 			</tr>
 
             <tr>
 				<td>City</td>
-				<td><input type="password" name="city"></td>
+				<td><input type="text" name="city"></td>
 			</tr>
 
             <tr>
 				<td>Country</td>
-				<td><input type="password" name="country"></td>
+				<td><input type="text" name="country"></td>
+			</tr>
+
+			<tr>
+				<label for="usertype">Choose Usertype:</label>
+					<select id="usertype" name="usertype" size="4" multiple>
+						<option value="admin">Admin</option>
+						<option value="customer ">Customer </option>
+						<option value="accountant">Accountant</option>
+						<option value="salesman">Salesman</option>
+					</select>
+				</label>
 			</tr>
 
 

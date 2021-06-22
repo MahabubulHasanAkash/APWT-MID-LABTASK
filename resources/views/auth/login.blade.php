@@ -14,6 +14,7 @@
 			{{$error}} <br>
 		 @endforeach
 		@endif
+		<a href="/signup"> Signup </a>
 		<fieldset>
 			<legend>Login</legend>
 		<table>
