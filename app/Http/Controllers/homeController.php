@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\DB;
 use Validator;
 use App\Models\User;
 
@@ -12,26 +13,14 @@ class homeController extends Controller
 
     function index(Request $req)
     {
-        /*$data = ['id'=> 123, 'name'=> 'alamin'];
-    	return view('home.index', $data);*/
 
-        /*return view('home.index')
-    			->with('id', '1234')
-    			->with('name', 'xyz');*/
+        $email = $req->session()->get('email');
+        $usertype = $req->session()->get('usertype');
 
-        /*return view('home.index')
-    			->withId('1234')
-    			->withName('xyz');*/
-
-        /*    	$v = view('home.index');
-    	$v->withId('123');
-    	$v->withName('alamin');
-   		return $v;*/
-
-        $id = 123;
-        $name = $req->session()->get('username');
-        return view('home.index', compact('id', 'name'));
+        return view('home.index', compact('email', 'usertype'));
     }
+
+
 
     public function create()
     {
@@ -40,38 +29,6 @@ class homeController extends Controller
 
     public function store(UserRequest $req)
     {
-
-        /* $validation = Validator::make($req->all(), [
-            'name' => 'required|min:3',
-            'email'=> 'required',
-            'cgpa' => 'required'
-        ]);
-
-        if($validation->fails()){
-            return redirect()
-                    ->route('home.create')
-                    ->with('errors', $validation->errors())
-                    ->withInput();
-
-            return back()
-                    ->with('errors', $validation->errors())
-                    ->withInput();
-        }*/
-
-
-        /* $this->validate($req, [
-            'name' => 'required|min:3',
-            'email'=> 'required',
-            'cgpa' => 'required'
-        ])->validate();*/
-
-
-        /*$req->validate([
-            'name' => 'required|min:3',
-            'email'=> 'required',
-            'cgpa' => 'required'
-        ])->validate();*/
-
 
         if ($req->hasFile('myimg')) {
 
@@ -83,12 +40,15 @@ class homeController extends Controller
             if ($file->move('upload', $file->getClientOriginalName())) {
 
                 $user = new User();
-                $user->username     = $req->username;
-                $user->password     = $req->password;
-                $user->name         = $req->name;
-                $user->dept         = $req->dept;
-                $user->cgpa         = $req->cgpa;
-                $user->type         = $req->type;
+                $user->name = $req->name;
+                $user->username = $req->username;
+                $user->email = $req->email;
+                $user->password = $req->password;
+                $user->phone = $req->phone;
+                $user->company = $req->company;
+                $user->city = $req->city;
+                $user->country = $req->country;
+                $user->usertype = $req->usertype;
                 $user->profile_img  = $file->getClientOriginalName();
 
                 if ($user->save()) {

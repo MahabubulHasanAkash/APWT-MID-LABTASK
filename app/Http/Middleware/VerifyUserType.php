@@ -16,11 +16,10 @@ class VerifyUserType
     public function handle($request, Closure $next)
     {
 
-    	if($request->session()->get('type') == "admin"){
-    		return $next($request);
-    	}else{
-    		return redirect('/home');
-    	}
-        
+        if ($request->session()->get('usertype') == "admin") {
+            return $next($request);
+        } else {
+            return redirect('/home');
+        }
     }
 }

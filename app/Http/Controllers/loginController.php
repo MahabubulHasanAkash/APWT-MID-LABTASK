@@ -18,17 +18,22 @@ class loginController extends Controller
 	public function verify(LoginRequest $req)
 	{
 		$user = DB::table('users')
-			->where('email', $req->username)
+			->where('email', $req->email)
 			->where('password', $req->password)
 			->count();
 
+
 		if ($user > 0) {
-			$req->session()->put('username', $req->username);
-			$req->session()->put('type', $req->username);
+			$user = DB::table('users')
+				->where('email', $req->email)
+				->first();
+
+			$req->session()->put('email', $req->email);
+			$req->session()->put('usertype', $user->usertype);
 
 			return redirect()->route('home.index');
 		} else {
-			$req->session()->flash('msg', 'invalid username/password');
+			$req->session()->flash('msg', 'invalid credentials');
 			return redirect('/login');
 		}
 	}

@@ -24,7 +24,7 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'max:50',
+            'email' => 'max:50|required',
             'password' => 'required|min:8|max:20|alpha_num'
 
         ];
@@ -33,7 +33,8 @@ class LoginRequest extends FormRequest
     public function messages()
     {
         return [
-            'email.required' => "input email",
+            'email.required' => "Email Required",
+            'password.required' => "Password Required",
             'email.max' => "max 50 chars",
             'password.min' => "Password length min 8 characters",
             'password.max' => "Password length max 20 characters",

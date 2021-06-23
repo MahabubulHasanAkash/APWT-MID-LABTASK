@@ -12,34 +12,14 @@
 */
 
 Route::get('/',  function () {
-	return view('auth.login');
+	return redirect('/login');
 });
-
-
 Route::get('/login', 'loginController@index');
 Route::post('/login', 'loginController@verify');
 Route::get('/logout', 'logoutController@index');
-
-
 Route::get('/signup', 'signupController@index');
-Route::post('/signup', 'signupController@signup');
-
-Route::group(['middleware' => ['sess']], function () {
-
-	Route::get('/home', 'homeController@index')->middleware('sess')->name('home.index');
-	//Route::get('/userlist', 'homeController@userlist')->name('home.userlist');
-	Route::get('/userlist', ['uses' => 'homeController@userlist', 'as' => 'home.userlist']);
-	Route::get('/details/{id}', 'homeController@show');
-
-
-	Route::group(['middleware' => ['type']], function () {
-		Route::get('/create', 'homeController@create')->name('home.create');
-		Route::post('/create', 'homeController@store');
-		Route::get('/user/edit/{id}', 'homeController@edit')->name('home.edit');
-		Route::post('/user/edit/{id}', 'homeController@update');
-		Route::get('/delete/{id}', 'homeController@delete');
-		Route::post('/delete/{id}', 'homeController@destroy');
-	});
+Route::group(['middleware' => ['session']], function () {
+	Route::get('/home', 'homeController@index')->middleware('session')->name('home.index');
+	Route::get('/system/sales', 'saleController@index')->middleware('session')->name('home.sale');
+	Route::get('/system/sales/sell-product', 'saleController@sellproduct')->middleware('session')->name('home.sale');
 });
-
-//Route::resource('/product', 'ProductController');

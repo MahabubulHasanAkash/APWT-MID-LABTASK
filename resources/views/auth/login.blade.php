@@ -20,7 +20,7 @@
 		<table>
 			<tr>
 				<td>Email</td>
-				<td><input type="text" name="username" value="admin@laravel.edu"></td>
+				<td><input type="text" name="email" value="admin@laravel.edu"></td>
 			</tr>
 			<tr>
 				<td>Password</td>
